@@ -1,0 +1,36 @@
+
+<button *ngIf="authService.hasrole('ROLE_ADMIN')"  class="btn btn-success mb-2" routerLink="/form">crear entidad</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">documento</th>
+      <th scope="col">direccion</th>
+      <th scope="col">nombre comercial</th>
+      <th scope="col">nro documento</th>
+      <th scope="col">razon social</th>
+      <th scope="col">contribuyente</th>
+      <th scope="col">telefono</th>
+      <th scope="col">estado</th>
+      <th *ngIf="authService.hasrole('ROLE_ADMIN')"  scope="col">accion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entidad of entidades" style="font-size: small;">
+      <th scope="row">{{entidad.id_entidad}}</th>
+      <td>{{entidad.documento?.nombre}}</td>
+      <td>{{entidad.direccion}}</td>
+      <td>{{entidad.nombre_comercial}}</td>
+      <td>{{entidad.nro_documento}}</td>
+      <td>{{entidad.razon_social}}</td>
+      <td>{{entidad.contribuyente?.nombre}}</td>
+      <td>{{entidad.telefono}}</td>
+      <td>{{entidad.estado}}</td>
+      <td>
+        <button *ngIf="authService.hasrole('ROLE_ADMIN')"  [routerLink]="['/form', entidad.id_entidad]" class="btn btn-link">editar</button>
+        <button *ngIf="authService.hasrole('ROLE_ADMIN')"  (click)="delete(entidad)" class="btn btn-link text-danger">eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

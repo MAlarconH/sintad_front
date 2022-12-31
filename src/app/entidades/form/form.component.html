@@ -1,0 +1,76 @@
+<section class="container mb-3">
+  <ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+      {{ err }}
+    </li>
+  </ul>
+
+  <div class="card col-lg-5 col-md-7 mt-4 p-3 " style="margin:auto" >
+
+    <h5 *ngIf="!entidad.id_entidad else elseEditTitulo">{{titulo}}</h5>
+    <ng-template #elseEditTitulo>
+      <h5 >Editar Entidad</h5>
+    </ng-template>
+    <div class="dropdown-divider"></div>
+    <form>
+      <div class="form-group-row">
+        <label for="nombre" class="col-form-label col-sm ">Direccion</label>
+        <div class="col-sm">
+          <input type="text" class="input" [(ngModel)]="entidad.direccion" name="direccion">
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="descripcion" class="col-form-label col-sm">Nombre comercial</label>
+        <div class="col-sm">
+          <textarea name="nombre_comercial" class="input" [(ngModel)]="entidad.nombre_comercial" cols="80"></textarea>
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="descripcion" class="col-form-label col-sm">Nro documento</label>
+        <div class="col-sm">
+          <textarea name="nro_documento" class="input" [(ngModel)]="entidad.nro_documento" cols="80"></textarea>
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="descripcion" class="col-form-label col-sm">Razon social</label>
+        <div class="col-sm">
+          <textarea name="razon_social" class="input" [(ngModel)]="entidad.razon_social" cols="80"></textarea>
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="descripcion" class="col-form-label col-sm">Telefono</label>
+        <div class="col-sm">
+          <textarea name="telefono" class="input" [(ngModel)]="entidad.telefono" cols="80"></textarea>
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="categoria" class="col-form-label col-sm">Documento</label>
+        <div class="col-sm">
+          <select [compareWith]="compararDocumentos" name="documento" class="input"  [(ngModel)]="entidad.documento" >
+            <option [ngValue]="undefined" >--Seleccionar un tipo de documento--</option>
+            <option *ngFor="let documento of documentos" [ngValue]="documento">{{documento.nombre}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group-row">
+        <label for="categoria" class="col-form-label col-sm">contribuyente</label>
+        <div class="col-sm">
+          <select [compareWith]="compararContribuyentes" name="contribuyente" class="input"  [(ngModel)]="entidad.contribuyente" >
+            <option [ngValue]="undefined" >--Seleccionar un tipo de contribuyente--</option>
+            <option *ngFor="let contribuyente of contribuyentes" [ngValue]="contribuyente">{{contribuyente.nombre}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="frow mt-3"  >
+        <div class="col-sm">
+          <button class="btn btn-success btn-block" role="button" (click)="create()" *ngIf="!entidad.id_entidad else elseBlock">Crear</button>
+          <ng-template #elseBlock>
+            <button class="btn btn-success btn-block" role="button" (click)="update()">Editar</button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</section>

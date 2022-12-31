@@ -1,0 +1,14 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/entidades">Entidades</a>
+
+  <div class="d-flex align-items-end">
+    <button *ngIf="!authService.isAuthenticated()" class="btn btn-success" routerLink="/login">Iniciar Sesion</button>
+
+    <button *ngIf="authService.isAuthenticated()" class="btn btn-success" (click)="authService.logout()">Cerrar Sesion</button>
+  </div>
+</nav>
+
+<div class="container mt-3">
+  <router-outlet></router-outlet>
+</div>
+
